@@ -1,16 +1,18 @@
 class Human:
-    def __init__(self, address_obj, name, middle_name, surname, tel):
+    def __init__(self, address_obj, name, middle_name, surname, tel, role):
         self._address = address_obj
         self._name = name
         self._middle_name = middle_name
         self._surname = surname
         self._tel = tel
+        self._role = role
 
     def __str__(self):
         return f'''Имя: {self._name}
 Отчество: {self._middle_name}
 Фамилия: {self._surname}
-Телефон: {self._tel}'''
+Телефон: {self._tel}
+Роль: {self._role}'''
 
     @property
     def name(self):
@@ -43,5 +45,9 @@ class Human:
     @tel.setter
     def tel(self, new_tel):
         self._tel = new_tel
+
+    @property
+    def role(self):
+        return self._role
 
 
