@@ -7,7 +7,10 @@ class Human:
         self._tel = tel
 
     def __str__(self):
-        return f'Имя: {self._name}\nОтчество: {self._middle_name}\nФамилия: {self._surname}\nТелефон: {self._tel}'
+        return f'''Имя: {self._name}
+Отчество: {self._middle_name}
+Фамилия: {self._surname}
+Телефон: {self._tel}'''
 
     @property
     def name(self):

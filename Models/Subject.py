@@ -8,12 +8,12 @@ class Subject:
         self.__mark = mark
 
     def __str__(self):
-        return f"""ID предмета: {self.__id}
+        return f'''ID предмета: {self.__id}
 Название предмета: {self.__name}
 Описание предмета: {self.__description}
 Преподаватель: {self.__teacher.surname}
 Студент: {self.__student.surname}
-Оценка: {self.__mark}"""
+Оценка: {self.__mark}'''
 
     @property
     def id(self):
@@ -24,7 +24,7 @@ class Subject:
         return self.__name
 
     @name.setter
-    def change_name(self, new_name):
+    def name(self, new_name):
         self.__name = new_name
 
     @property
@@ -32,15 +32,15 @@ class Subject:
         return self.__description
 
     @description.setter
-    def change_description(self, new_description):
+    def description(self, new_description):
         self.__description = new_description
 
     @property
     def teacher(self):
         return self.__teacher
 
-    @name.setter
-    def change_teacher(self, new_teacher):
+    @teacher.setter
+    def teacher(self, new_teacher):
         self.__teacher = new_teacher
 
     @property
@@ -51,6 +51,6 @@ class Subject:
     def mark(self):
         return self.__mark
 
-    @name.setter
-    def change_mark(self, new_mark):
+    @mark.setter
+    def mark(self, new_mark):
         self.__mark = new_mark

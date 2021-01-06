@@ -15,5 +15,5 @@ class Group:
         return self.__student_list
 
     @student_list.setter
-    def change_student_list(self, new_student_list):
+    def student_list(self, new_student_list):
         self.__student_list = new_student_list
