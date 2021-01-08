@@ -39,3 +39,13 @@ def execute_read_query(connection, query):
         return result
     except Error as e:
         print(e)
+
+def read_data():
+    list_address = []
+    list1 = execute_read_query(connection, "SELECT * FROM address")
+    if list1 == []:
+        print('Список пуст!')
+    else:
+        for _ in range(len(list1)):
+            address = Address(list1[_][0],list1[_][1],list1[_][2],list1[_][3],list1[_][4],list1[_][5],list1[_][6],list1[_][7])
+            list_address.append(address)
