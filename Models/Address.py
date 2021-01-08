@@ -1,5 +1,6 @@
 class Address:
-    def __init__(self, country, area, type, type_name, street_type, street_type_name, building, apart):
+    def __init__(self, id, country, area, type, type_name, street_type, street_type_name, building, apart):
+        self.__id = id
         self.__country = country
         self.__area = area
         self.__type = type
@@ -82,6 +83,10 @@ class Address:
     @apart.setter
     def apart(self, new_apart):
         self.__apart = new_apart
+
+    @property
+    def id(self):
+        return self.__id
 
 
 
