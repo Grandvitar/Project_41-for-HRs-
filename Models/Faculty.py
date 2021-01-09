@@ -1,14 +1,19 @@
 import Models.Univer
 class Faculty(Models.Univer.Univer):
-    def __init__(self, id, name, description, spec):
+    def __init__(self, id, name, description):
         super().__init__(id, name, description)
-        self.__spec = spec
+        self._id = id
 
     def __str__(self):
-        return f'''ID: {self._id}
+        return f'''
+ID Факультета: {self._id}
 Название: {self._name}
 Описание: {self._description}
-Специальности: {self.__spec}'''
+'''
+
+    @property
+    def id(self):
+        return self._id
 
     @property
     def spec(self):

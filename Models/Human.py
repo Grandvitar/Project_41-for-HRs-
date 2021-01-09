@@ -1,5 +1,5 @@
 class Human:
-    def __init__(self, address_obj, name, middle_name, surname, tel, role):
+    def __init__(self, role, address_obj, name, middle_name, surname, tel):
         self._address = address_obj
         self._name = name
         self._middle_name = middle_name

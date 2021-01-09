@@ -1,16 +1,15 @@
 class Univer:
-    def __init__(self, id, name, description, faculties):
+    def __init__(self, id, name, description):
         self._id = id
         self._name = name
         self._description = description
-        self.__faculties = faculties
 
     def __str__(self):
         return f'''
 ID: {self._id}
 Название: {self._name}
 Описание: {self._description}
-Факультеты: {self.__faculties}'''
+'''
 
     @property
     def id(self):

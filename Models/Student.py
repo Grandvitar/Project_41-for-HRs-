@@ -1,11 +1,12 @@
 import Models.Human
 class Student(Models.Human.Human):
-    def __init__(self, role, address_obj, name, middle_name, surname, tel, stud_number, date_in, date_out, status):
-        super().__init__(address_obj, name, middle_name, surname, tel, role)
+    def __init__(self, role, address_obj, name, middle_name, surname, tel, stud_number, date_in, date_out, group_id, status):
+        super().__init__(role, address_obj, name, middle_name, surname, tel)
         self.__stud_number = stud_number
         self.__date_in = date_in
         self.__date_out = date_out
         self.__status = status
+        self.__group_id = group_id
 
     def __str__(self):
         return f'''Роль: {self._role}

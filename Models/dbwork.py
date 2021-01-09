@@ -41,6 +41,13 @@ def execute_read_query(connection, query):
     except Error as e:
         print(e)
 
+def read_data_address():
+    lst_address_DB = execute_read_query(connection, "SELECT * FROM address")
+    if lst_address_DB == []:
+        print('Список пуст!')
+    else:
+        return lst_address_DB
+
 
 def write_address_in_list():
     lst_address_DB = read_data_address()
@@ -58,16 +65,7 @@ def write_address_in_list():
         result_lst_address.append(Models.Address.Address(id, country, area, type, type_name, street_type, street_type_name, building, apart))
     return result_lst_address
 
-
-def read_data_address():
-    lst_address_DB = execute_read_query(connection, "SELECT * FROM address")
-    if lst_address_DB == []:
-        print('Список пуст!')
-    else:
-        return lst_address_DB
-
-
-def write_address_in_DB(list_adress):
+def write_address_in_DB(list_address):
     pass
 
 def read_data_student():
@@ -76,7 +74,6 @@ def read_data_student():
         print('Список пуст!')
     else:
         return lst_student_DB
-
 
 def write_student_in_list(lst_address):
     lst_student_DB = read_data_student()
@@ -91,23 +88,103 @@ def write_student_in_list(lst_address):
         date_in = lst_student_DB[_][5]
         date_out = lst_student_DB[_][6]
         status = lst_student_DB[_][7]
-        id_address = lst_student_DB[_][8]
-        #добавить в классе Студент group_id
+        address_id = lst_student_DB[_][8]
+        group_id = lst_student_DB[_][9]
 
         for address in lst_address:
-            if id_address == address.id:
+            if address_id == address.id:
                 address_obj = address
                 break
-        result_lst_student.append(Models.Student.Student(role, address_obj, name, middle_name, surname, tel, stud_number, date_in, date_out, status))
+        result_lst_student.append(Models.Student.Student(role, address_obj, name, middle_name, surname, tel, stud_number, date_in, date_out, group_id, status))
     return result_lst_student
 
-#
-# lst_address = write_address_in_list()
-#
-# lst_student = write_student_in_list(lst_address)
-#
-# for i in lst_student:
-#     print(i)
+def read_data_teacher():
+    lst_teacher_DB = execute_read_query(connection, "SELECT * FROM teacher")
+    if lst_teacher_DB == []:
+        print('Список пуст!')
+    else:
+        return lst_teacher_DB
 
 
+def write_teacher_in_list(lst_address):
+    lst_teacher_DB = read_data_teacher()
+    result_lst_teacher = []
+    for _ in range(len(lst_teacher_DB)):
+        role = "teacher"
+        passport = lst_teacher_DB[_][0]
+        name = lst_teacher_DB[_][1]
+        middle_name = lst_teacher_DB[_][2]
+        surname = lst_teacher_DB[_][3]
+        tel = lst_teacher_DB[_][4]
+        address_id = lst_teacher_DB[_][5]
+        subjects = lst_teacher_DB[_][6]
 
+        for address in lst_address:
+            if address_id == address.id:
+                address_obj = address
+                break
+        result_lst_teacher.append(Models.Teacher.Teacher(role, address_obj, passport, name, middle_name, surname, tel, subjects))
+    return result_lst_teacher
+
+def read_data_faculty():
+    lst_faculty_DB = execute_read_query(connection, "SELECT * FROM faculties")
+    if lst_faculty_DB == []:
+        print('Список пуст!')
+    else:
+        return lst_faculty_DB
+
+def write_faculty_in_list():
+    lst_faculty_DB = read_data_faculty()
+    result_lst_faculty = []
+    for _ in range(len(lst_faculty_DB)):
+        faculty_id = lst_faculty_DB[_][0]
+        name = lst_faculty_DB[_][1]
+        description = lst_faculty_DB[_][2]
+        result_lst_faculty.append(Models.Faculty.Faculty(faculty_id, name, description))
+    return result_lst_faculty
+
+def read_data_spec():
+    lst_spec_DB = execute_read_query(connection, "SELECT * FROM spec")
+    if lst_spec_DB == []:
+        print('Список пуст!')
+    else:
+        return lst_spec_DB
+
+def write_spec_in_list(lst_faculty):
+    lst_spec_DB = read_data_spec()
+    result_lst_spec = []
+    for _ in range(len(lst_spec_DB)):
+        id = lst_spec_DB[_][0]
+        name = lst_spec_DB[_][1]
+        description = lst_spec_DB[_][2]
+        faculty_id = lst_spec_DB[_][3]
+
+        for faculty in lst_faculty:
+            if faculty_id == faculty.id:
+                faculty_obj = faculty
+                break
+        result_lst_spec.append(Models.Spec.Spec(id, name, description, faculty_obj))
+    return result_lst_spec
+
+
+def read_data_univer():
+    lst_univer_DB = execute_read_query(connection, "SELECT * FROM univer")
+    if lst_univer_DB == []:
+        print('Список пуст!')
+    else:
+        return lst_univer_DB
+
+def write_univer_in_list():
+    lst_univer_DB = read_data_spec()
+    result_lst_univer = []
+    for _ in range(len(lst_univer_DB)):
+        id = lst_univer_DB[_][0]
+        name = lst_univer_DB[_][1]
+        description = lst_univer_DB[_][2]
+        result_lst_univer.append(Models.Univer.Univer(id, name, description))
+    return result_lst_univer
+# lst_faculty = write_faculty_in_list()
+#
+lst_univer = write_univer_in_list()
+for i in lst_univer:
+    print(i)

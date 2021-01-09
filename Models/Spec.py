@@ -1,21 +1,18 @@
 import Models.Univer
 class Spec(Models.Univer.Univer):
-    def __init__(self, id, name, description, groupes, subjects):
+    def __init__(self, id, name, description, faculty_obj):
         super().__init__(id, name, description)
-        self.__groupes = groupes
-        self.__subjects = subjects
+        self._faculty_obj = faculty_obj
 
     def __str__(self):
-        return f'''ID: {self._id}
+        return f'''
+ID Специальности: {self._id}
 Название: {self._name}
 Описание: {self._description}
-Группы: {self.__groupes}
-Предметы: {self.__subjects}'''
+Факультет: {self._faculty_obj}
+'''
 
     @property
-    def subjects(self):
-        return self.__subjects
+    def faculty_obj(self):
+        return self._faculty_obj
 
-    @subjects.setter
-    def subjects(self, new_subject):
-        self.__subjects = new_subject
