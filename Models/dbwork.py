@@ -183,8 +183,29 @@ def write_univer_in_list():
         result_lst_univer.append(Models.Univer.Univer(id, name, description))
     return result_lst_univer
 
+def read_data_group():
+    lst_group_DB = execute_read_query(connection, "SELECT * FROM stud_group")
+    if lst_group_DB == []:
+        print('Список пуст!')
+    else:
+        return lst_group_DB
+
+def write_group_in_list(lst_spec):
+    lst_group_DB = read_data_group()
+    result_lst_group = []
+    for _ in range(len(lst_group_DB)):
+        id = lst_group_DB[_][0]
+        spec_id = lst_group_DB[_][1]
+
+        for spec in lst_spec:
+            if spec_id == spec_id:
+                spec_obj = spec
+                break
+        result_lst_group.append(Models.Group.Group(id, spec_obj))
+    return result_lst_group
+
 # lst_faculty = write_faculty_in_list()
-#
-# lst_univer = write_univer_in_list()
-# for i in lst_univer:
+# lst_spec = write_spec_in_list(lst_faculty)
+# lst_group = write_group_in_list(lst_spec)
+# for i in lst_group:
 #     print(i)

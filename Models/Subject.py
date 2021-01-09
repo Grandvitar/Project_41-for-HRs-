@@ -1,5 +1,5 @@
 class Subject:
-    def __init__(self, id, name, description, teacher, student, mark):
+    def __init__(self, id, name, description, mark, teacher, student):
         self.__id = id
         self.__name = name
         self.__description = description
@@ -8,12 +8,14 @@ class Subject:
         self.__mark = mark
 
     def __str__(self):
-        return f'''ID предмета: {self.__id}
+        return f'''
+ID предмета: {self.__id}
 Название предмета: {self.__name}
 Описание предмета: {self.__description}
+Оценка: {self.__mark}
 Преподаватель: {self.__teacher.surname}
 Студент: {self.__student.surname}
-Оценка: {self.__mark}'''
+'''
 
     @property
     def id(self):
