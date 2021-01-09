@@ -166,7 +166,6 @@ def write_spec_in_list(lst_faculty):
         result_lst_spec.append(Models.Spec.Spec(id, name, description, faculty_obj))
     return result_lst_spec
 
-
 def read_data_univer():
     lst_univer_DB = execute_read_query(connection, "SELECT * FROM univer")
     if lst_univer_DB == []:
@@ -175,7 +174,7 @@ def read_data_univer():
         return lst_univer_DB
 
 def write_univer_in_list():
-    lst_univer_DB = read_data_spec()
+    lst_univer_DB = read_data_univer()
     result_lst_univer = []
     for _ in range(len(lst_univer_DB)):
         id = lst_univer_DB[_][0]
@@ -183,8 +182,9 @@ def write_univer_in_list():
         description = lst_univer_DB[_][2]
         result_lst_univer.append(Models.Univer.Univer(id, name, description))
     return result_lst_univer
+
 # lst_faculty = write_faculty_in_list()
 #
-lst_univer = write_univer_in_list()
-for i in lst_univer:
-    print(i)
+# lst_univer = write_univer_in_list()
+# for i in lst_univer:
+#     print(i)
