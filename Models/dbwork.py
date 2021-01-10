@@ -204,8 +204,52 @@ def write_group_in_list(lst_spec):
         result_lst_group.append(Models.Group.Group(id, spec_obj))
     return result_lst_group
 
-# lst_faculty = write_faculty_in_list()
-# lst_spec = write_spec_in_list(lst_faculty)
-# lst_group = write_group_in_list(lst_spec)
-# for i in lst_group:
-#     print(i)
+def read_data_subject():
+    lst_subject_DB = execute_read_query(connection, "SELECT * FROM subject")
+    if lst_subject_DB == []:
+        print('Список пуст!')
+    else:
+        return lst_subject_DB
+
+def write_subject_in_list(lst_teacher, lst_student):
+    lst_subject_DB = read_data_subject()
+    result_lst_subject = []
+    for _ in range(len(lst_subject_DB)):
+        id = lst_subject_DB[_][0]
+        name = lst_subject_DB[_][1]
+        description = lst_subject_DB[_][2]
+        mark = lst_subject_DB[_][3]
+        teacher_id = lst_subject_DB[_][4]
+        student_id = lst_subject_DB[_][5]
+
+        for teacher in lst_teacher:
+            if teacher_id == teacher.passport:
+                teacher_obj = teacher
+                break
+        for student in lst_student:
+            if student_id == student.stud_number:
+                student_obj = student
+                break
+        result_lst_subject.append(Models.Subject.Subject(id, name, description, mark, teacher_obj, student_obj))
+    return result_lst_subject
+lst_address = write_address_in_list()
+lst_teacher = write_teacher_in_list(lst_address)
+lst_student = write_student_in_list(lst_address)
+lst_subject = write_subject_in_list(lst_teacher, lst_student)
+for i in lst_subject:
+    print(i)
+
+
+
+
+
+
+
+
+# b = read_data_subject()
+# for i in b:
+#     print (i)
+
+
+
+
