@@ -232,12 +232,12 @@ def write_subject_in_list(lst_teacher, lst_student):
                 break
         result_lst_subject.append(Models.Subject.Subject(id, name, description, mark, teacher_obj, student_obj))
     return result_lst_subject
-lst_address = write_address_in_list()
-lst_teacher = write_teacher_in_list(lst_address)
-lst_student = write_student_in_list(lst_address)
-lst_subject = write_subject_in_list(lst_teacher, lst_student)
-for i in lst_subject:
-    print(i)
+# lst_address = write_address_in_list()
+# lst_teacher = write_teacher_in_list(lst_address)
+# lst_student = write_student_in_list(lst_address)
+# lst_subject = write_subject_in_list(lst_teacher, lst_student)
+# for i in lst_subject:
+#     print(i)
 
 
 
