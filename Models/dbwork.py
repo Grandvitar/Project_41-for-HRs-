@@ -48,7 +48,6 @@ def read_data_address():
     else:
         return lst_address_DB
 
-
 def write_address_in_list():
     lst_address_DB = read_data_address()
     result_lst_address = []
@@ -65,8 +64,29 @@ def write_address_in_list():
         result_lst_address.append(Models.Address.Address(id, country, area, type, type_name, street_type, street_type_name, building, apart))
     return result_lst_address
 
+def delete_data():
+    execute_query(connection, "DELETE FROM univer")
+    execute_query(connection, "DELETE FROM faculties")
+    execute_query(connection, "DELETE FROM spec")
+    execute_query(connection, "DELETE FROM stud_group")
+    execute_query(connection, "DELETE FROM student")
+    execute_query(connection, "DELETE FROM teacher")
+    execute_query(connection, "DELETE FROM subject")
+    execute_query(connection, "DELETE FROM address")
+
 def write_address_in_DB(list_address):
-    pass
+    for _ in range(len(list_address)):
+        id = list_address[_].id
+        country = list_address[_].country
+        area = list_address[_].area
+        type = list_address[_].type
+        type_name = list_address[_].type_name
+        street_type = list_address[_].street_type
+        street_type_name = list_address[_].street_type_name
+        building = list_address[_].building
+        apart = list_address[_].apart
+        execute_query(connection, f"""INSERT INTO adress (id, country, area, type, type_name, street_type, street_type_name, building, apart)
+        VALUES {id}, '{country}', '{area}', '{type}', '{type_name}', '{street_type}', '{street_type_name}', {building}, {apart})""")
 
 def read_data_student():
     lst_student_DB = execute_read_query(connection, "SELECT * FROM student")
@@ -74,6 +94,9 @@ def read_data_student():
         print('Список пуст!')
     else:
         return lst_student_DB
+
+def update_address_DB(list_address):
+    
 
 def write_student_in_list(lst_address):
     lst_student_DB = read_data_student()
