@@ -1,18 +1,23 @@
 class Human:
-    def __init__(self, role, address_obj, name, middle_name, surname, tel):
-        self._address = address_obj
+    def __init__(self, role, name, middle_name, surname, tel, address_obj, password):
+        self._role = role
         self._name = name
         self._middle_name = middle_name
         self._surname = surname
         self._tel = tel
-        self._role = role
+        self._address = address_obj
+        self._password = password
 
     def __str__(self):
-        return f'''Имя: {self._name}
+        return f'''
+Роль: {self._role}
+Имя: {self._name}
 Отчество: {self._middle_name}
 Фамилия: {self._surname}
 Телефон: {self._tel}
-Роль: {self._role}'''
+Адрес: {self._address}
+Пароль: {self._password}
+'''
 
     @property
     def name(self):
@@ -49,5 +54,13 @@ class Human:
     @property
     def role(self):
         return self._role
+
+    @property
+    def password(self):
+        return self._password
+
+    @password.setter
+    def password(self, new_password):
+        self._password = new_password
 
 

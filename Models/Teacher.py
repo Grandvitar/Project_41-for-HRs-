@@ -1,27 +1,22 @@
 import Models.Human
 class Teacher(Models.Human.Human):
-    def __init__(self, role, address_obj, passport, name, middle_name, surname, tel, subjects):
-        super().__init__(role, address_obj, name, middle_name, surname, tel)
-        self.__subjects = subjects
-        self.__passport = passport
+    def __init__(self, role, name, middle_name, surname, tel, address_obj, password, passport, univer_obj):
+        super().__init__(role, name, middle_name, surname, tel, address_obj, password)
+        self._univer_obj = univer_obj
+        self._passport = passport
 
     def __str__(self):
-        return f'''Роль: {self._role}
-Адрес: {self._address}
-Паспорт: {self.__passport}
+        return f'''
+Роль: {self._role}
 Имя: {self._name}
 Отчество: {self._middle_name}
 Фамилия: {self._surname}
 Телефон: {self._tel}
-Предметы: {self.__subjects}'''
-
-    @property
-    def subjects(self):
-        return self.__subjects
-
-    @subjects.setter
-    def subjects(self, new_subject):
-        self.__subjects = new_subject
+Адрес: {self._address}
+Паспорт: {self._passport}
+Предметы: {self.__subjects}
+Университет: {self._univer_obj}
+'''
 
     @property
     def passport(self):
