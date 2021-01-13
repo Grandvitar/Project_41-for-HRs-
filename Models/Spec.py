@@ -1,8 +1,9 @@
 import Models.Univer
 class Spec(Models.Univer.Univer):
-    def __init__(self, id, name, description, faculty_obj):
+    def __init__(self, id, name, description, group_obj, subjects_obj):
         super().__init__(id, name, description)
-        self._faculty_obj = faculty_obj
+        self._group_obj = group_obj
+        self._subjects_obj = subjects_obj
 
     def __str__(self):
         return f'''
@@ -12,7 +13,4 @@ ID Специальности: {self._id}
 Факультет: {self._faculty_obj}
 '''
 
-    @property
-    def faculty_obj(self):
-        return self._faculty_obj
 

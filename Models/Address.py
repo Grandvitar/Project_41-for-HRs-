@@ -11,7 +11,8 @@ class Address:
         self.__apart = apart
 
     def __str__(self):
-        return f'''Страна: {self.__country}
+        return f'''
+Страна: {self.__country}
 Область: {self.__area}
 Тип населенного пункта: {self.__type}
 Название населенного пункта: {self.__type_name}
