@@ -14,7 +14,6 @@ class Teacher(Models.Human.Human):
 Телефон: {self._tel}
 Адрес: {self._address}
 Паспорт: {self._passport}
-Предметы: {self.__subjects}
 Университет: {self._univer_obj}
 '''
 

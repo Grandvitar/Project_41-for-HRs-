@@ -10,7 +10,7 @@ class Spec(Models.Univer.Univer):
 ID Специальности: {self._id}
 Название: {self._name}
 Описание: {self._description}
-Факультет: {self._faculty_obj}
+Группы: {self._group_obj}
 '''
 
 

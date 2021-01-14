@@ -3,14 +3,13 @@ class Univer:
         self._id = id
         self._name = name
         self._description = description
-        self._faculty_obj = faculty_obj
+        self._faculty_obj - faculty_obj
 
     def __str__(self):
         return f'''
 ID: {self._id}
 Название: {self._name}
 Описание: {self._description}
-Факультеты: {self._faculty_obj}
 '''
 
     @property
