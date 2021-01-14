@@ -1,20 +1,17 @@
 class Subject:
-    def __init__(self, id, name, description, mark, teacher_obj, student_obj):
+    def __init__(self, id, name, description, teacher, spec_id):
         self.__id = id
         self.__name = name
         self.__description = description
-        self.__teacher_obj = teacher_obj
-        self.__student_obj = student_obj
-        self.__mark = mark
+        self.__teacher = teacher
+        self.__spec_id = spec_id
 
     def __str__(self):
         return f'''
 ID предмета: {self.__id}
 Название предмета: {self.__name}
 Описание предмета: {self.__description}
-Оценка: {self.__mark}
-Преподаватель: {self.__teacher_obj.surname}
-Студент: {self.__student_obj.surname}
+Преподаватель: {self.__teacher.surname}
 '''
 
     @property
@@ -30,7 +27,7 @@ ID предмета: {self.__id}
         self.__name = new_name
 
     @property
-    def description (self):
+    def description(self):
         return self.__description
 
     @description.setter
@@ -39,20 +36,12 @@ ID предмета: {self.__id}
 
     @property
     def teacher(self):
-        return self.__teacher_obj
+        return self.__teacher
 
     @teacher.setter
     def teacher(self, new_teacher):
-        self.__teacher_obj = new_teacher
+        self.__teacher = new_teacher
 
     @property
-    def student(self):
-        return self.__student_obj
-
-    @property
-    def mark(self):
-        return self.__mark
-
-    @mark.setter
-    def mark(self, new_mark):
-        self.__mark = new_mark
+    def spec_id(self):
+        return self.__spec_id
