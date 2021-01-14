@@ -1,8 +1,8 @@
 import Models.Human
 class Teacher(Models.Human.Human):
-    def __init__(self, role, name, middle_name, surname, tel, address_obj, password, passport, univer_obj):
+    def __init__(self, role, name, middle_name, surname, tel, address_obj, password, passport):
         super().__init__(role, name, middle_name, surname, tel, address_obj, password)
-        self._univer_obj = univer_obj
+        self._univer_id = univer_id
         self._passport = passport
 
     def __str__(self):
@@ -15,7 +15,7 @@ class Teacher(Models.Human.Human):
 Адрес: {self._address}
 Паспорт: {self._passport}
 Предметы: {self.__subjects}
-Университет: {self._univer_obj}
+Университет: {self._univer_id}
 '''
 
     @property
