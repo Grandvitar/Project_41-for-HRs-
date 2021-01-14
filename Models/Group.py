@@ -1,5 +1,5 @@
 class Group:
-    def __init__(self, id, stud_obj):
+    def __init__(self, id, stud_lst):
         self._id = id
         self._stud_obj = stud_obj
 
