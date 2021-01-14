@@ -1,9 +1,10 @@
 import Models.Human
+
+
 class Teacher(Models.Human.Human):
-    def __init__(self, role, name, middle_name, surname, tel, address_obj, password, passport, univer_obj):
+    def __init__(self, role, name, middle_name, surname, tel, address_obj, password, passport):
         super().__init__(role, name, middle_name, surname, tel, address_obj, password)
-        self._univer_obj = univer_obj
-        self._passport = passport
+        self.__passport = passport
 
     def __str__(self):
         return f'''
@@ -13,9 +14,8 @@ class Teacher(Models.Human.Human):
 Фамилия: {self._surname}
 Телефон: {self._tel}
 Адрес: {self._address}
-Паспорт: {self._passport}
-Предметы: {self.__subjects}
-Университет: {self._univer_obj}
+Паспорт: {self.__passport}
+Предметы: {self.__subject_list}
 '''
 
     @property
@@ -25,4 +25,3 @@ class Teacher(Models.Human.Human):
     @passport.setter
     def passport(self, new_passport):
         self.__passport = new_passport
-
