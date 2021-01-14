@@ -88,6 +88,3 @@ class Address:
     @property
     def id(self):
         return self.__id
-
-
-
