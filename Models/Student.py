@@ -1,17 +1,17 @@
 import Models.Human
 class Student(Models.Human.Human):
-    def __init__(self, role, name, middle_name, surname, tel, address_obj, password, stud_number, date_in, date_out, group_obj, status):
+    def __init__(self, role, name, middle_name, surname, tel, address_obj, password, stud_number, date_in, date_out, group_id, status):
         super().__init__(self, role, name, middle_name, surname, tel, address_obj, password)
         self.__stud_number = stud_number
         self.__date_in = date_in
         self.__date_out = date_out
         self.__status = status
-        self.__group_obj = group_obj
+        self.__group_id = group_id
 
     def __str__(self):
         return f'''
 Роль: {self._role}
-Группа: {self.__group_obj}
+Группа: {self.__group_id}
 Имя: {self._name}
 Отчество: {self._middle_name}
 Фамилия: {self._surname}
