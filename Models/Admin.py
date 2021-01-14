@@ -1,20 +1,27 @@
 class Admin:
-    def __init__(self, role, password):
-        self._role = role
-        self._password = password
+    def __init__(self, login, password, role):
+        self.__login = login
+        self.__password = password
+        self.__role = role
 
     def __str__(self):
         return f'''
-Ваш пароль: {self._password}
+Ваш логин: {self.__login}
+Ваш пароль: {self.__password}
 '''
+
     @property
     def role(self):
-        return self._role
+        return self.__role
 
-    @propetry
+    @property
     def password(self):
-        return self._password
+        return self.__password
 
     @password.setter
     def password(self, new_password):
-        self._password = new_password
+        self.__password = new_password
+
+    @property
+    def login(self):
+        return self.__login
