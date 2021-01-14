@@ -1,16 +1,16 @@
 class Univer:
-    def __init__(self, id, name, description, faculty_obj):
+    def __init__(self, id, name, description, faculty_lst):
         self._id = id
         self._name = name
         self._description = description
-        self._faculty_obj = faculty_obj
+        self._faculty_lst = faculty_lst
 
     def __str__(self):
         return f'''
 ID: {self._id}
 Название: {self._name}
 Описание: {self._description}
-Факультеты: {self._faculty_obj}
+Факультеты: {self._faculty_lst}
 '''
 
     @property
@@ -32,6 +32,14 @@ ID: {self._id}
     @description.setter
     def description(self, new_description):
         self._description = new_description
+        
+    @property
+    def faculty_lst(self):
+        return self._faculty_lst
+
+    
+        
+    
 
 
 
