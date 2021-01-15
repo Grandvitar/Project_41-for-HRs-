@@ -1,58 +1,49 @@
 class Subject:
-    def __init__(self, id, name, description, mark, teacher_obj, student_obj):
-        self.__id = id
-        self.__name = name
-        self.__description = description
-        self.__teacher_obj = teacher_obj
-        self.__student_obj = student_obj
-        self.__mark = mark
+    def __init__(self, id, name, description, teacher_lst, spec_id):
+        self._id = id
+        self._name = name
+        self._description = description
+        self._teacher_lst = teacher_lst
+        self._spec_id = spec_id
+
 
     def __str__(self):
         return f'''
-ID предмета: {self.__id}
-Название предмета: {self.__name}
-Описание предмета: {self.__description}
-Оценка: {self.__mark}
-Преподаватель: {self.__teacher_obj.surname}
-Студент: {self.__student_obj.surname}
+ID предмета: {self._id}
+Название предмета: {self._name}
+Описание предмета: {self._description}
+Преподаватели: {self._teacher_lst}
+Специальность: {self._spec_id}
 '''
 
     @property
     def id(self):
-        return self.__id
+        return self._id
 
     @property
     def name(self):
-        return self.__name
+        return self._name
 
     @name.setter
     def name(self, new_name):
-        self.__name = new_name
+        self._name = new_name
 
     @property
     def description (self):
-        return self.__description
+        return self._description
 
     @description.setter
     def description(self, new_description):
-        self.__description = new_description
+        self._description = new_description
 
     @property
-    def teacher(self):
-        return self.__teacher_obj
-
-    @teacher.setter
-    def teacher(self, new_teacher):
-        self.__teacher_obj = new_teacher
+    def teacher_lst(self):
+        return self._teacher_lst
 
     @property
-    def student(self):
-        return self.__student_obj
+    def spec_id(self):
+        return self._spec_id
 
     @property
-    def mark(self):
-        return self.__mark
-
-    @mark.setter
-    def mark(self, new_mark):
-        self.__mark = new_mark
+    def spec_id(self):
+        return self._spec_id

@@ -8,10 +8,10 @@ class Student(Models.Human.Human):
         self._status = status
         self._group_id = group_id
 
-
     def __str__(self):
         return f'''
 Роль: {self._role}
+Группа: {self._group_id}
 Имя: {self._name}
 Отчество: {self._middle_name}
 Фамилия: {self._surname}
@@ -21,7 +21,7 @@ class Student(Models.Human.Human):
 Поступил: {self._date_in}
 Выпуск: {self._date_out}
 Статус: {self._status}
-Группа: {self._group_id}
+Номер группы {self._group_id}
 '''
 
     @property
@@ -38,7 +38,7 @@ class Student(Models.Human.Human):
 
     @property
     def status(self):
-        return self._status
+        return self.__status
 
     @status.setter
     def status(self, new_status):
@@ -47,9 +47,3 @@ class Student(Models.Human.Human):
     @property
     def group_id(self):
         return self._group_id
-
-    @status.setter
-    def group_id(self, new_group_id):
-        self.__group_id = new_group_id
-
-
