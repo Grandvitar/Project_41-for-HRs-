@@ -1,15 +1,15 @@
 class Sub_Stud:
-    def __init__(self, id, subject_id, student_id, mark):
+    def __init__(self, id, subject_id, student, mark):
         self._id = id
         self._subject_id = subject_id
-        self._student_id = student_id
+        self._student = student
         self._mark = mark
 
     def __str__(self):
         return f'''
 ID экзамена: {self._id}
 Предмет: {self._subject_id}
-Студент: {self._student_id}
+Студент: {self._student}
 Оценка: {self._mark}
 '''
 
@@ -22,8 +22,8 @@ ID экзамена: {self._id}
         return self._subject_id
 
     @property
-    def student_id(self):
-        return self._student_id
+    def student(self):
+        return self._student
 
     @property
     def mark(self):
@@ -32,3 +32,4 @@ ID экзамена: {self._id}
     @mark.setter
     def mark(self, new_mark):
         self._mark = new_mark
+

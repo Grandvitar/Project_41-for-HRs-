@@ -17,18 +17,28 @@ class Teacher(Models.Human.Human):
 Университет: {self._univer_id}
 '''
 
-@property
-def passport(self):
-    return self.__passport
+    @property
+    def passport(self):
+        return self._passport
 
-@passport.setter
-def passport(self, new_passport):
-    self._passport = new_passport
+    @passport.setter
+    def passport(self, new_passport):
+        self._passport = new_passport
 
-@property
-def password(self):
-    return self.__passport
+    @property
+    def password(self):
+        return self._passport
 
-@passport.setter
-def password(self, new_password):
-    self._password = new_password
+    @passport.setter
+    def password(self, new_password):
+        self._password = new_password
+
+    @property
+    def surname(self):
+        return self._surname
+
+
+
+
+
+
