@@ -27,15 +27,29 @@ class Teacher(Models.Human.Human):
 
     @property
     def password(self):
-        return self._passport
+        return self._password
 
-    @passport.setter
+    @password.setter
     def password(self, new_password):
         self._password = new_password
 
     @property
     def surname(self):
         return self._surname
+
+    def view_subjects(self, lst_subjects):
+        lst_sub = []
+        for subject in lst_subjects:
+            if self._passport == subject.teacher.passport:
+                lst_sub.append(subject.name)
+        return lst_sub
+
+    # def view_stud_marks(self, lst_sub_stud):
+    #     for sub_stud in lst_sub_stud:
+    #         if sub_stud.subject_id
+    #             pass
+
+
 
 
 

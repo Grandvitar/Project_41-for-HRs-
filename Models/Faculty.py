@@ -8,8 +8,7 @@ class Faculty:
 
     def __str__(self):
         return f'''
-ID Факультета: {self._id}
-Название: {self._name}
+Название факультета: {self._name}
 Описание: {self._description}
 Специальности: {self._spec_lst}
 '''

@@ -8,11 +8,9 @@ class Subject:
 
     def __str__(self):
         return f'''
-ID предмета: {self._id}
 Название предмета: {self._name}
 Описание предмета: {self._description}
 Преподаватель: {self._teacher.surname}
-Специальность: {self._spec_id}
 '''
 
     @property

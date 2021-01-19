@@ -7,8 +7,7 @@ class Univer:
 
     def __str__(self):
         return f'''
-ID: {self._id}
-Название: {self._name}
+Название университета: {self._name}
 Описание: {self._description}
 Факультеты: {self._faculty_lst}
 '''

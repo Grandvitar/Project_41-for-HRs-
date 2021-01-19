@@ -134,6 +134,7 @@ def write_teacher_in_list(lst_address):
                 break
         result_lst_teacher.append(Models.Teacher.Teacher(role, name, middle_name, surname, tel, address_obj, password, passport, univer_id))
     return result_lst_teacher
+
 # lst_address = write_address_in_list()
 # lst_teacher = write_teacher_in_list(lst_address)
 # for i in lst_teacher:
@@ -213,21 +214,11 @@ def write_spec_in_list(lst_group, lst_subjects):
         for group in lst_group:
             if id == group.spec_id:
                 group_lst.append(group.id)
-        subjects_lst = []
-        for subject in lst_subjects:
-            if id == subject.spec_id:
-                subjects_lst.append(subject.id)
-        result_lst_spec.append(Models.Spec.Spec(id, name, description, group_lst, subjects_lst, faculty_id))
+        for subject_obj in lst_subjects:
+            if id == subject_obj.spec_id:
+                subject = subject_obj
+        result_lst_spec.append(Models.Spec.Spec(id, name, description, group_lst, subject.description, faculty_id))
     return result_lst_spec
-
-# lst_address = write_address_in_list()
-# lst_students = write_student_in_list(lst_address)
-# lst_teacher = write_teacher_in_list(lst_address)
-# lst_group = write_group_in_list(lst_students)
-# lst_subjects = write_subject_in_list(lst_teacher)
-# lst_spec = write_spec_in_list(lst_group, lst_subjects)
-# for i in lst_spec:
-#     print(i)
 
 def read_data_faculty():
     lst_faculty_DB = execute_read_query(connection, "SELECT * FROM faculties")
@@ -246,10 +237,21 @@ def write_faculty_in_list(lst_spec):
         univer_id = lst_faculty_DB[_][3]
         spec_lst = []
         for spec in lst_spec:
-            if id == spec.faculty_id:
+            if id == spec._faculty_id:
                 spec_lst.append(spec.name)
         result_lst_faculty.append(Models.Faculty.Faculty(id, name, description, spec_lst, univer_id))
     return result_lst_faculty
+
+# lst_address = write_address_in_list()
+# lst_students = write_student_in_list(lst_address)
+# lst_teacher = write_teacher_in_list(lst_address)
+# lst_group = write_group_in_list(lst_students)
+# lst_subjects = write_subject_in_list(lst_teacher)
+# lst_spec = write_spec_in_list(lst_group, lst_subjects)
+# for i in lst_spec:
+#     print(i)
+
+
 # lst_address = write_address_in_list()
 # lst_students = write_student_in_list(lst_address)
 # lst_teacher = write_teacher_in_list(lst_address)
@@ -313,13 +315,13 @@ def write_Sub_Stud_in_list(lst_students):
         result_lst_Sub_Stud.append(Models.Sub_Stud.Sub_Stud(id, subject_id, student, mark))
     return result_lst_Sub_Stud
 
-lst_teacher = write_teacher_in_list(write_address_in_list())
-lst_subject = write_subject_in_list(lst_teacher)
-lst_students = write_student_in_list(write_address_in_list())
-lst_sub_stud = write_Sub_Stud_in_list(lst_students)
-for e in lst_students[0].write_exams_results(lst_sub_stud, lst_subject):
-    print(lst_students[0].surname)
-    print(e)
+# lst_teacher = write_teacher_in_list(write_address_in_list())
+# lst_subject = write_subject_in_list(lst_teacher)
+# lst_students = write_student_in_list(write_address_in_list())
+# lst_sub_stud = write_Sub_Stud_in_list(lst_students)
+# for e in lst_students[0].write_exams_results(lst_sub_stud, lst_subject):
+#     print(lst_students[0].surname)
+#     print(e)
 
 
 
@@ -333,6 +335,15 @@ for e in lst_students[0].write_exams_results(lst_sub_stud, lst_subject):
 # lst_Sub_Stud = write_Sub_Stud_in_list()
 # for i in lst_Sub_Stud:
 #     print(i)
+
+# lst_address = write_address_in_list()
+# lst_teacher = write_teacher_in_list(lst_address)
+# lst_subjects = write_subject_in_list(lst_teacher)
+# lst_sub = lst_teacher[0].view_subjects(lst_subjects)
+# for i in lst_sub:
+#     print(lst_teacher[0].surname)
+#     print(i)
+
 
 def delete_data():
     execute_query(connection, "DELETE FROM univer")

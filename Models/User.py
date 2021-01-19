@@ -1,15 +1,15 @@
 class User:
     def __init__(self, login, password, role):
-        self.__login = login
+        self._login = login
         self.__password = password
         self.__role = role
 
     def __str__(self):
-        return f'login {self.__login}, role {self.__role}'
+        return f'login {self._login}, role {self.__role}'
 
     @property
     def login(self):
-        return self.__login
+        return self._login
 
     @property
     def password(self):
