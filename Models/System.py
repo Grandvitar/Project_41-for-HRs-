@@ -26,17 +26,16 @@ class  System:
     def get_exams_results(lst_sub_stud, lst_subjects):
         return Models.Student.Student.write_exams_results(lst_sub_stud, lst_subjects)
     @staticmethod
-    def get_lst_sub_stud(lst_students):
-        return Models.dbwork.write_Sub_Stud_in_list(lst_students)
+    def get_lst_sub_stud():
+        return Models.dbwork.write_Sub_Stud_in_list(System.get_students(System.get_addresses()))
     @staticmethod
-    def get_subjects(lst_teachers):
-        return Models.dbwork.write_Sub_Stud_in_list(lst_teachers)
+    def get_subjects():
+        return Models.dbwork.write_subject_in_list(System.get_teachers(System.get_addresses()))
 
-    def exams_for_students():
-        lst_exams = System.get_exams_results(System.get_lst_sub_stud(System.get_students(System.get_addresses())))
-        for sub_stud in lst_sub_stud:
-            if stud_number == sub_stud.student.stud_number:
-                return lst_exams, sub_stud.subject.name, sub_stud.mark
+    def exams_for_students(self):
+        lst_subjects = System.get_subjects()
+        lst_sub_stud = System.get_lst_sub_stud()
+        return self.auth_user.write_exams_results(lst_sub_stud, lst_subjects)
 
     def auth_student(self, stud_number, password):
         lst_students = System.get_students(System.get_addresses())

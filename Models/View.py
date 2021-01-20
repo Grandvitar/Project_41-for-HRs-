@@ -15,6 +15,9 @@ def UI():
             b = int(input('Введите пароль:'))
             if system1.auth_student(a, b):
                 print(f'{system1.auth_user.surname}, добро пожаловать!')
+                lst_exams = system1.exams_for_students()
+                for i in lst_exams:
+                    print(i)
             else:
                 print('Данные неверны')
         elif choise == 2:

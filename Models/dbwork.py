@@ -9,6 +9,7 @@ import Models.Teacher
 import Models.Univer
 import Models.Address
 import Models.Sub_Stud
+import Models.Admin
 
 
 import sqlite3 as sq
@@ -42,6 +43,28 @@ def execute_read_query(connection, query):
         return result
     except Error as e:
         print(e)
+
+def read_data_admins():
+    lst_admins_DB = execute_read_query(connection, "SELECT * FROM admins")
+    if lst_admins_DB == []:
+        print('Список пуст!')
+    else:
+        return lst_admins_DB
+lst_admins = read_data_admins()
+for i in lst_admins:
+    print(i)
+
+def write_admins_in_list():
+    lst_admins_DB = read_data_admins()
+    result_lst_admins = []
+    for _ in range(len(lst_admins_DB)):
+        id = lst_admins_DB[_][0]
+        login = lst_admins_DB[_][1]
+        password = lst_admins_DB[_][2]
+        result_lst_admins.append(Models.Address.Address(id, login, password))
+    return result_lst_admins
+
+
 
 def read_data_address():
     lst_address_DB = execute_read_query(connection, "SELECT * FROM address")
