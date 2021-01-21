@@ -1,4 +1,6 @@
 import Models.Human
+import Models.Exam2
+
 class Teacher(Models.Human.Human):
     def __init__(self, role, name, middle_name, surname, tel, address_obj, password, passport, univer_id):
         super().__init__(role, name, middle_name, surname, tel, address_obj, password)
@@ -44,10 +46,19 @@ class Teacher(Models.Human.Human):
                 lst_sub.append(subject.name)
         return lst_sub
 
-    # def view_stud_marks(self, lst_sub_stud):
-    #     for sub_stud in lst_sub_stud:
-    #         if sub_stud.subject_id
-    #             pass
+    def view_stud_marks(self, lst_subjects, lst_sub_stud):
+        lst_marks = []
+        for subject in lst_subjects:
+            if self._passport == subject.teacher.passport:
+                for sub_stud in lst_sub_stud:
+                    if sub_stud.subject.id == subject.id:
+                        subject_name = sub_stud.subject.name
+                        student_surname = sub_stud.student.surname
+                        lst_marks.append(Models.Exam2.Exam2(subject_name, student_surname, sub_stud.mark))
+        return lst_marks
+
+
+
 
 
 

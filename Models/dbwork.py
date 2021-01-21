@@ -50,9 +50,9 @@ def read_data_admins():
         print('Список пуст!')
     else:
         return lst_admins_DB
-lst_admins = read_data_admins()
-for i in lst_admins:
-    print(i)
+# lst_admins = read_data_admins()
+# for i in lst_admins:
+#     print(i)
 
 def write_admins_in_list():
     lst_admins_DB = read_data_admins()
@@ -324,27 +324,32 @@ def read_data_Sub_Stud():
     else:
         return lst_Sub_Stud_DB
 
-def write_Sub_Stud_in_list(lst_students):
+def write_Sub_Stud_in_list(lst_students, lst_subject):
     lst_Sub_Stud_DB = read_data_Sub_Stud()
     result_lst_Sub_Stud = []
     for _ in range(len(lst_Sub_Stud_DB)):
         id = lst_Sub_Stud_DB[_][0]
         subject_id = lst_Sub_Stud_DB[_][1]
+        for subject_obj in lst_subject:
+            if subject_id == subject_obj.id:
+                subject = subject_obj
         student_id = lst_Sub_Stud_DB[_][2]
         for student_obj in lst_students:
             if student_id == student_obj.stud_number:
                 student = student_obj
         mark = lst_Sub_Stud_DB[_][3]
-        result_lst_Sub_Stud.append(Models.Sub_Stud.Sub_Stud(id, subject_id, student, mark))
+        result_lst_Sub_Stud.append(Models.Sub_Stud.Sub_Stud(id, subject, student, mark))
     return result_lst_Sub_Stud
 
 # lst_teacher = write_teacher_in_list(write_address_in_list())
 # lst_subject = write_subject_in_list(lst_teacher)
 # lst_students = write_student_in_list(write_address_in_list())
-# lst_sub_stud = write_Sub_Stud_in_list(lst_students)
-# for e in lst_students[0].write_exams_results(lst_sub_stud, lst_subject):
-#     print(lst_students[0].surname)
-#     print(e)
+# lst_sub_stud = write_Sub_Stud_in_list(lst_students, lst_subject)
+# lst_stud_marks = lst_teacher[0].view_stud_marks(lst_subject, lst_sub_stud)
+# for i in lst_stud_marks:
+#     print(lst_teacher[0].surname)
+#     print(i)
+
 
 
 

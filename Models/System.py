@@ -13,24 +13,28 @@ class  System:
     def auth_user(self):
         return self._auth_user
 
-    @staticmethod
-    def get_students(lst_address):
-        return Models.dbwork.write_student_in_list(lst_address)
+
     @staticmethod
     def get_addresses():
         return Models.dbwork.write_address_in_list()
     @staticmethod
-    def get_teachers(lst_address):
-        return Models.dbwork.write_teacher_in_list(lst_address)
+    def get_students():
+        return Models.dbwork.write_student_in_list(System.get_addresses())
     @staticmethod
-    def get_exams_results(lst_sub_stud, lst_subjects):
-        return Models.Student.Student.write_exams_results(lst_sub_stud, lst_subjects)
-    @staticmethod
-    def get_lst_sub_stud():
-        return Models.dbwork.write_Sub_Stud_in_list(System.get_students(System.get_addresses()))
+    def get_teachers():
+        return Models.dbwork.write_teacher_in_list(System.get_addresses())
+
     @staticmethod
     def get_subjects():
-        return Models.dbwork.write_subject_in_list(System.get_teachers(System.get_addresses()))
+        return Models.dbwork.write_subject_in_list(System.get_teachers())
+
+    @staticmethod
+    def get_lst_sub_stud():
+        return Models.dbwork.write_Sub_Stud_in_list(System.get_students(), System.get_subjects())
+
+    @staticmethod
+    def get_exams_results():
+        return Models.Student.Student.write_exams_results(System.get_lst_sub_stud(), System.get_subjects())
 
     def exams_for_students(self):
         lst_subjects = System.get_subjects()
@@ -38,16 +42,20 @@ class  System:
         return self.auth_user.write_exams_results(lst_sub_stud, lst_subjects)
 
     def auth_student(self, stud_number, password):
-        lst_students = System.get_students(System.get_addresses())
+        lst_students = System.get_students()
         for student in lst_students:
             if stud_number == student.stud_number and password == student.password:
                 self._auth_user = student
                 return True
         return False
 
+    def exams_for_teacher(self):
+        lst_subjects = System.get_subjects()
+        lst_sub_stud = System.get_lst_sub_stud()
+        return self.auth_user.view_stud_marks(lst_subjects, lst_sub_stud)
 
     def auth_teacher(self, passport, password):
-        lst_teachers = System.get_teachers(Models.dbwork.write_address_in_list())
+        lst_teachers = System.get_teachers()
         for teacher in lst_teachers:
             if passport == teacher.passport and password == teacher.password:
                 self._auth_user = teacher
@@ -74,7 +82,7 @@ class  System:
         return False
 
     def edit_role(self, login, new_role):
-        if self.__auth_user.role == 'admin':
+        if self._auth_user.role == 'admin':
             for user in self.__list_users:
                 if login == user.login:
                     user.role = new_role
