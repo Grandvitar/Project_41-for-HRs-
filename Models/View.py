@@ -31,6 +31,47 @@ def UI():
                     print(i)
             else:
                 print('Данные неверные')
+        elif choise == 3:
+            a = input('Введите логин:')
+            b = input('Введите пароль:')
+            if system1.auth_admin(a, b):
+                print(f'{system1.auth_user.login}, добро пожаловать!')
+                action = int(input('''Для просмотра информации нажмите 1, для изменения информации нажмите 2,
+для удаления информации нажмите 3\n
+'''))
+                if action == 1:
+                    view = int(input('''Для просмотри информации об университете нажмите 1, 
+для просмотра списка студентов нажмите 2, 
+для просмотра списков преподавателей нажмите 3,
+для просмотра списка администраторов нажмите 4
+'''))
+                    if view == 1:
+                        univer_info = system1.get_univer()
+                        faculties_info = system1.get_faculties()
+                        spec_info = system1.get_specs()
+                        for i in univer_info:
+                            print(i)
+                        for i in faculties_info:
+                            print(i)
+                        for i in spec_info:
+                            print(i)
+                    if view == 2:
+                        lst_students = system1.get_students()
+                        for i in lst_students:
+                            print(i)
+                    if view == 3:
+                        lst_teachers = system1.get_teachers()
+                        for i in lst_teachers:
+                            print(i)
+                    if view == 4:
+                        lst_admins = system1.get_admins()
+                        for i in lst_admins:
+                            print(i)
+            else:
+                print('Данные неверные')
+
+
+
         elif choise == 4:
             flag = system1.log_out()
             if flag:

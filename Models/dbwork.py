@@ -61,7 +61,7 @@ def write_admins_in_list():
         id = lst_admins_DB[_][0]
         login = lst_admins_DB[_][1]
         password = lst_admins_DB[_][2]
-        result_lst_admins.append(Models.Address.Address(id, login, password))
+        result_lst_admins.append(Models.Admin.Admin(id, login, password))
     return result_lst_admins
 
 

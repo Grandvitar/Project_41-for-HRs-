@@ -13,7 +13,6 @@ class Spec:
 Описание: {self._description}
 Группы: {self._group_lst}
 Предметы: {self._subject}
-Факультет: {self._faculty_id}
 '''
     @property
     def id(self):

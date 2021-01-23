@@ -13,7 +13,6 @@ class  System:
     def auth_user(self):
         return self._auth_user
 
-
     @staticmethod
     def get_addresses():
         return Models.dbwork.write_address_in_list()
@@ -23,18 +22,30 @@ class  System:
     @staticmethod
     def get_teachers():
         return Models.dbwork.write_teacher_in_list(System.get_addresses())
-
     @staticmethod
     def get_subjects():
         return Models.dbwork.write_subject_in_list(System.get_teachers())
-
     @staticmethod
     def get_lst_sub_stud():
         return Models.dbwork.write_Sub_Stud_in_list(System.get_students(), System.get_subjects())
-
     @staticmethod
     def get_exams_results():
         return Models.Student.Student.write_exams_results(System.get_lst_sub_stud(), System.get_subjects())
+    @staticmethod
+    def get_admins():
+        return Models.dbwork.write_admins_in_list()
+    @staticmethod
+    def get_groups():
+        return Models.dbwork.write_group_in_list(System.get_students())
+    @staticmethod
+    def get_specs():
+        return Models.dbwork.write_spec_in_list(System.get_groups(), System.get_subjects())
+    @staticmethod
+    def get_faculties():
+        return Models.dbwork.write_faculty_in_list(System.get_specs())
+    @staticmethod
+    def get_univer():
+        return Models.dbwork.write_univer_in_list(System.get_faculties())
 
     def exams_for_students(self):
         lst_subjects = System.get_subjects()
@@ -59,6 +70,14 @@ class  System:
         for teacher in lst_teachers:
             if passport == teacher.passport and password == teacher.password:
                 self._auth_user = teacher
+                return True
+        return False
+
+    def auth_admin(self, login, password):
+        lst_admins = System.get_admins()
+        for admin in lst_admins:
+            if login == admin.login and password == admin.password:
+                self._auth_user = admin
                 return True
         return False
 
