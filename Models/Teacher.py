@@ -2,14 +2,13 @@ import Models.Human
 import Models.Exam2
 
 class Teacher(Models.Human.Human):
-    def __init__(self, role, name, middle_name, surname, tel, address_obj, password, passport, univer_id):
-        super().__init__(role, name, middle_name, surname, tel, address_obj, password)
+    def __init__(self, name, middle_name, surname, tel, address_obj, password, passport, univer_id):
+        super().__init__(name, middle_name, surname, tel, address_obj, password)
         self._univer_id = univer_id
         self._passport = passport
 
     def __str__(self):
         return f'''
-Роль: {self._role}
 Имя: {self._name}
 Отчество: {self._middle_name}
 Фамилия: {self._surname}

@@ -2,6 +2,8 @@ import Models.User
 import Models.Student
 import Models.Teacher
 import Models.dbwork
+import Models.Admin
+import Models.Address
 
 class  System:
     def __init__(self):
@@ -81,8 +83,23 @@ class  System:
                 return True
         return False
 
+    def add_admin(self, login, password):
+        lst_admins = []
+        new_admin = Models.Admin.Admin(login, password)
+        lst_admins.append(new_admin)
+        return lst_admins
 
+    def add_student(self, name, middle_name, surname, tel, address_obj, password, stud_number, date_in, date_out, group_id, status):
+        lst_data = []
+        new_student = Models.Student.Student(name, middle_name, surname, tel, address_obj, password, stud_number, date_in, date_out, group_id, status)
+        lst_data.append(new_student)
+        return lst_data
 
+    def add_address(self, id, country, area, type, type_name, street_type, street_type_name, building, apart):
+        lst_data = []
+        new_address = Models.Address.Address(id, country, area, type, type_name, street_type, street_type_name, building, apart)
+        lst_data.append(new_address)
+        return lst_data
 
     def registration(self, login, password, role):
         user = Models.User.User(login, password, role)

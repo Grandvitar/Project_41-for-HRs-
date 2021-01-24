@@ -1,8 +1,8 @@
 import Models.Human
 import Models.Exam1
 class Student(Models.Human.Human):
-    def __init__(self, role, name, middle_name, surname, tel, address_obj, password, stud_number, date_in, date_out, group_id, status):
-        super().__init__(role, name, middle_name, surname, tel, address_obj, password)
+    def __init__(self, name, middle_name, surname, tel, address_obj, password, stud_number, date_in, date_out, group_id, status):
+        super().__init__(name, middle_name, surname, tel, address_obj, password)
         self._stud_number = stud_number
         self._date_in = date_in
         self._date_out = date_out
@@ -11,7 +11,6 @@ class Student(Models.Human.Human):
 
     def __str__(self):
         return f'''
-Роль: {self._role}
 Группа: {self._group_id}
 Имя: {self._name}
 Отчество: {self._middle_name}
@@ -39,11 +38,11 @@ class Student(Models.Human.Human):
 
     @property
     def status(self):
-        return self.__status
+        return self._status
 
     @status.setter
     def status(self, new_status):
-        self.__status = new_status
+        self._status = new_status
 
     @property
     def group_id(self):

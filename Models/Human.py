@@ -1,6 +1,5 @@
 class Human:
-    def __init__(self, role, name, middle_name, surname, tel, address_obj, password):
-        self._role = role
+    def __init__(self, name, middle_name, surname, tel, address_obj, password):
         self._name = name
         self._middle_name = middle_name
         self._surname = surname
@@ -10,7 +9,6 @@ class Human:
 
     def __str__(self):
         return f'''
-Роль: {self._role}
 Имя: {self._name}
 Отчество: {self._middle_name}
 Фамилия: {self._surname}
@@ -50,10 +48,9 @@ class Human:
     @tel.setter
     def tel(self, new_tel):
         self._tel = new_tel
-
     @property
-    def role(self):
-        return self._role
+    def address(self):
+        return self._address
 
     @property
     def password(self):

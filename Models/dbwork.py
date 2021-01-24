@@ -50,20 +50,22 @@ def read_data_admins():
         print('Список пуст!')
     else:
         return lst_admins_DB
-# lst_admins = read_data_admins()
-# for i in lst_admins:
-#     print(i)
 
 def write_admins_in_list():
     lst_admins_DB = read_data_admins()
     result_lst_admins = []
     for _ in range(len(lst_admins_DB)):
-        id = lst_admins_DB[_][0]
-        login = lst_admins_DB[_][1]
-        password = lst_admins_DB[_][2]
-        result_lst_admins.append(Models.Admin.Admin(id, login, password))
+        login = lst_admins_DB[_][0]
+        password = lst_admins_DB[_][1]
+        result_lst_admins.append(Models.Admin.Admin(login, password))
     return result_lst_admins
 
+def write_admins_in_DB(lst_admins):
+    for _ in range(len(lst_admins)):
+        login = lst_admins[_].login
+        password = lst_admins[_].password
+        execute_query(connection, (f'''INSERT INTO admins (login, password)
+        VALUES ('{login}', '{password}')'''))
 
 
 def read_data_address():
@@ -72,9 +74,6 @@ def read_data_address():
         print('Список пуст!')
     else:
         return lst_address_DB
-# lst_address = read_data_address()
-# for i in lst_address:
-#     print(i)
 
 def write_address_in_list():
     lst_address_DB = read_data_address()
@@ -92,6 +91,18 @@ def write_address_in_list():
         result_lst_address.append(Models.Address.Address(id, country, area, type, type_name, street_type, street_type_name, building, apart))
     return result_lst_address
 
+def write_address_in_DB(country, area, type, type_name, street_type, street_type_name, building, apart):
+    execute_query(connection,f"""INSERT INTO address (country, area, type, type_name, street_type, street_name, building, apart)
+            VALUES ('{country}', '{area}', '{type}', '{type_name}', '{street_type}', '{street_type_name}', '{building}', '{apart}')""")
+    return execute_read_query(connection, f'SELECT MAX(`id`) FROM `address`;')[0][0]
+
+def write_student_in_DB(stud_number, name, middle_name, surname, tel, address_id, password, date_in, date_out, group_id, status):
+    execute_query(connection, f"""INSERT INTO student (id, name, middle_name, surname, tel, address_id, password, date_in, date_out, group_id, status)
+            VALUES ('{stud_number}', '{name}', '{middle_name}', '{surname}', '{tel}', '{address_id}', '{password}', '{date_in}', '{date_out}', '{group_id}', '{status}')""")
+
+
+# write_address_in_DB('dgdg', 'dsgdf', 'dsfgdfg', 'dsfgdfg','dsfgdfg', 'dsfgdfg', 'dsfgdfg', 'dsfgdfg')
+# write_student_in_DB('123', 'dop', 'dop', 'dop', 'dop', 'dop', 'dop', 'dop', '156', '145', '154')
 
 def read_data_student():
     lst_student_DB = execute_read_query(connection, "SELECT * FROM student")
@@ -104,7 +115,6 @@ def write_student_in_list(lst_address):
     lst_student_DB = read_data_student()
     result_lst_student = []
     for _ in range(len(lst_student_DB)):
-        role = "student"
         stud_number = lst_student_DB[_][0]
         name = lst_student_DB[_][1]
         middle_name = lst_student_DB[_][2]
@@ -116,18 +126,12 @@ def write_student_in_list(lst_address):
         address_id = lst_student_DB[_][8]
         group_id = lst_student_DB[_][9]
         password = lst_student_DB[_][10]
-
         for address in lst_address:
             if address_id == address.id:
                 address_obj = address
                 break
-
-        result_lst_student.append(Models.Student.Student(role, name, middle_name, surname, tel, address_obj, password, stud_number, date_in, date_out, group_id, status))
+        result_lst_student.append(Models.Student.Student(name, middle_name, surname, tel, address_obj, password, stud_number, date_in, date_out, group_id, status))
     return result_lst_student
-# lst_address = write_address_in_list()
-# lst_stud = write_student_in_list(lst_address)
-# for i in lst_stud:
-#     print(i)
 
 def read_data_teacher():
     lst_teacher_DB = execute_read_query(connection, "SELECT * FROM teacher")
@@ -136,12 +140,10 @@ def read_data_teacher():
     else:
         return lst_teacher_DB
 
-
 def write_teacher_in_list(lst_address):
     lst_teacher_DB = read_data_teacher()
     result_lst_teacher = []
     for _ in range(len(lst_teacher_DB)):
-        role = "teacher"
         passport = lst_teacher_DB[_][0]
         name = lst_teacher_DB[_][1]
         middle_name = lst_teacher_DB[_][2]
@@ -155,13 +157,8 @@ def write_teacher_in_list(lst_address):
             if address_id == address.id:
                 address_obj = address
                 break
-        result_lst_teacher.append(Models.Teacher.Teacher(role, name, middle_name, surname, tel, address_obj, password, passport, univer_id))
+        result_lst_teacher.append(Models.Teacher.Teacher(name, middle_name, surname, tel, address_obj, password, passport, univer_id))
     return result_lst_teacher
-
-# lst_address = write_address_in_list()
-# lst_teacher = write_teacher_in_list(lst_address)
-# for i in lst_teacher:
-#     print(i)
 
 def read_data_group():
     lst_group_DB = execute_read_query(connection, "SELECT * FROM stud_group")
@@ -182,12 +179,6 @@ def write_group_in_list(lst_students):
                 stud_lst.append(stud.surname)
         result_lst_group.append(Models.Group.Group(id, spec_id, stud_lst))
     return result_lst_group
-
-# lst_address = write_address_in_list()
-# lst_stud = write_student_in_list(lst_address)
-# lst_group = write_group_in_list(lst_stud)
-# for i in lst_group:
-#     print(i)
 
 def read_data_subject():
     lst_subject_DB = execute_read_query(connection, "SELECT * FROM subject")
@@ -211,12 +202,6 @@ def write_subject_in_list(lst_teacher):
         spec_id = lst_subject_DB[_][4]
         result_lst_subject.append(Models.Subject.Subject(id, name, description, teacher, spec_id))
     return result_lst_subject
-
-# lst_teacher = write_teacher_in_list(write_address_in_list())
-# lst_subject = write_subject_in_list(lst_teacher)
-#
-# for i in lst_subject:
-#     print(i)
 
 def read_data_spec():
     lst_spec_DB = execute_read_query(connection, "SELECT * FROM spec")
@@ -265,26 +250,6 @@ def write_faculty_in_list(lst_spec):
         result_lst_faculty.append(Models.Faculty.Faculty(id, name, description, spec_lst, univer_id))
     return result_lst_faculty
 
-# lst_address = write_address_in_list()
-# lst_students = write_student_in_list(lst_address)
-# lst_teacher = write_teacher_in_list(lst_address)
-# lst_group = write_group_in_list(lst_students)
-# lst_subjects = write_subject_in_list(lst_teacher)
-# lst_spec = write_spec_in_list(lst_group, lst_subjects)
-# for i in lst_spec:
-#     print(i)
-
-
-# lst_address = write_address_in_list()
-# lst_students = write_student_in_list(lst_address)
-# lst_teacher = write_teacher_in_list(lst_address)
-# lst_group = write_group_in_list(lst_students)
-# lst_subjects = write_subject_in_list(lst_teacher)
-# lst_spec = write_spec_in_list(lst_group, lst_subjects)
-# lst_faculty = write_faculty_in_list(lst_spec)
-# for i in lst_faculty:
-#     print(i)
-
 def read_data_univer():
     lst_univer_DB = execute_read_query(connection, "SELECT * FROM univer")
     if lst_univer_DB == []:
@@ -305,17 +270,6 @@ def write_univer_in_list(lst_faculty):
                 faculty_lst.append(faculty.name)
         result_lst_univer.append(Models.Univer.Univer(id, name, description, faculty_lst))
     return result_lst_univer
-
-# lst_address = write_address_in_list()
-# lst_students = write_student_in_list(lst_address)
-# lst_teacher = write_teacher_in_list(lst_address)
-# lst_group = write_group_in_list(lst_students)
-# lst_subjects = write_subject_in_list(lst_teacher)
-# lst_spec = write_spec_in_list(lst_group, lst_subjects)
-# lst_faculty = write_faculty_in_list(lst_spec)
-# lst_univer = write_univer_in_list(lst_faculty)
-# for i in lst_faculty:
-#     print(i)
 
 def read_data_Sub_Stud():
     lst_Sub_Stud_DB = execute_read_query(connection, "SELECT * FROM Sub_Stud")
@@ -341,38 +295,6 @@ def write_Sub_Stud_in_list(lst_students, lst_subject):
         result_lst_Sub_Stud.append(Models.Sub_Stud.Sub_Stud(id, subject, student, mark))
     return result_lst_Sub_Stud
 
-# lst_teacher = write_teacher_in_list(write_address_in_list())
-# lst_subject = write_subject_in_list(lst_teacher)
-# lst_students = write_student_in_list(write_address_in_list())
-# lst_sub_stud = write_Sub_Stud_in_list(lst_students, lst_subject)
-# lst_stud_marks = lst_teacher[0].view_stud_marks(lst_subject, lst_sub_stud)
-# for i in lst_stud_marks:
-#     print(lst_teacher[0].surname)
-#     print(i)
-
-
-
-
-# lst_address = write_address_in_list()
-# lst_students = write_student_in_list(lst_address)
-# lst_group = write_group_in_list(lst_students)
-# lst_subjects = write_subject_in_list()
-# lst_spec = write_spec_in_list(lst_group, lst_subjects)
-# lst_faculty = write_faculty_in_list(lst_spec)
-# lst_univer = write_univer_in_list(lst_faculty)
-# lst_Sub_Stud = write_Sub_Stud_in_list()
-# for i in lst_Sub_Stud:
-#     print(i)
-
-# lst_address = write_address_in_list()
-# lst_teacher = write_teacher_in_list(lst_address)
-# lst_subjects = write_subject_in_list(lst_teacher)
-# lst_sub = lst_teacher[0].view_subjects(lst_subjects)
-# for i in lst_sub:
-#     print(lst_teacher[0].surname)
-#     print(i)
-
-
 def delete_data():
     execute_query(connection, "DELETE FROM univer")
     execute_query(connection, "DELETE FROM faculties")
@@ -383,19 +305,7 @@ def delete_data():
     execute_query(connection, "DELETE FROM subject")
     execute_query(connection, "DELETE FROM address")
 
-def write_address_in_DB(list_address):
-    for _ in range(len(list_address)):
-        id = list_address[_].id
-        country = list_address[_].country
-        area = list_address[_].area
-        type = list_address[_].type
-        type_name = list_address[_].type_name
-        street_type = list_address[_].street_type
-        street_type_name = list_address[_].street_type_name
-        building = list_address[_].building
-        apart = list_address[_].apart
-        execute_query(connection, f"""INSERT INTO adress (id, country, area, type, type_name, street_type, street_type_name, building, apart)
-        VALUES {id}, '{country}', '{area}', '{type}', '{type_name}', '{street_type}', '{street_type_name}', {building}, {apart})""")
+
 
 
 

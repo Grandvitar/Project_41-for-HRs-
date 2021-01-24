@@ -1,6 +1,5 @@
 class Admin:
-    def __init__(self, id, login, password):
-        self._id = id
+    def __init__(self, login, password):
         self._login = login
         self._password = password
 
@@ -19,3 +18,5 @@ class Admin:
     @password.setter
     def password(self, new_password):
         self._password = new_password
+
+
