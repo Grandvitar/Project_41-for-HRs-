@@ -51,9 +51,10 @@ class Teacher(Models.Human.Human):
             if self._passport == subject.teacher.passport:
                 for sub_stud in lst_sub_stud:
                     if sub_stud.subject.id == subject.id:
+                        sub_stud_id = sub_stud.id
                         subject_name = sub_stud.subject.name
                         student_surname = sub_stud.student.surname
-                        lst_marks.append(Models.Exam2.Exam2(subject_name, student_surname, sub_stud.mark))
+                        lst_marks.append(Models.Exam2.Exam2(sub_stud_id, subject_name, student_surname, sub_stud.mark))
         return lst_marks
 
 

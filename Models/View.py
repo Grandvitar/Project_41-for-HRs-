@@ -4,7 +4,7 @@ import Models.dbwork
 import Models.Student
 import Models.Subject
 import Models.Teacher
-import  Models.Admin
+import Models.Admin
 
 def UI():
     system1 = Models.System.System()
@@ -27,13 +27,23 @@ def UI():
             b = int(input('Введите пароль:'))
             if system1.auth_teacher(a, b):
                 print(f'{system1.auth_user.surname}, добро пожаловать!')
-                a = int(input('Для просмотра результатов экзаменов - нажмите 1, для выставления оценок - нажмите 2'))
+                a = int(input('''Для просмотра результатов экзаменов - нажмите 1, 
+для выставления оценок - нажмите 2,
+для ввода данных нового экзамена - нажмите 3
+'''))
                 if a == 1:
                     lst_exams_teach = system1.exams_for_teacher()
                     for i in lst_exams_teach:
                         print(i)
-                # elif a == 2:
-                #     a = input('Введите номер студенческого')
+                elif a == 2:
+                    exam_id = input('Введите номер экзамена для редактирования:')
+                    mark = input('Введите новый балл за экзамен')
+                    Models.dbwork.edit_marks_in_DB(exam_id, mark)
+                elif a == 3:
+                    subject_id = input('Введите уникальный номер предмета:')
+                    stud_number = input('Введите номер студенческого сдавшего:')
+                    mark = input('Введите оценку')
+                    Models.dbwork.write_exam_in_DB(subject_id, stud_number, mark)
             else:
                 print('Данные неверные')
         elif choise == 3:
@@ -74,7 +84,7 @@ def UI():
                         lst_admins = system1.get_admins()
                         for i in lst_admins:
                             print(i)
-                if action == 2:
+                elif action == 2:
                     add = int(input('''Нажмите 1 для добавления администратора, 2 для добавления студента,
 3 для добавления преподавателя
 '''))
@@ -106,10 +116,28 @@ def UI():
                         group_id = input('Введите номер группы студента: ')
                         status = input('Введите статус студента (обучается/в академическом): ')
                         Models.dbwork.write_student_in_DB(stud_number, name, middle_name, surname, tel, address_id, password, date_in, date_out, group_id, status)
-
-
-
-                    # if add == 3:
+                    if add == 3:
+                        print('Создание карточки преподавателя начните с ввода его адреса')
+                        b = input('Введите название страны:')
+                        c = input('Введите область:')
+                        d = input('Введите тип населенного пункта:')
+                        e = input('Введите название населенного пункта')
+                        f = input('Введите тип улицы:')
+                        g = input('Введите название улицы:')
+                        h = input('Введите номер дома:')
+                        i = input('Введите номер квартиры:')
+                        id_address = Models.dbwork.write_address_in_DB(b, c, d, e, f, g, h, i)
+                        passport = input('Введите номер паспорта')
+                        name = input('Введите имя преподавателя:')
+                        middle_name = input('Введите отчество преподавателя')
+                        surname = input('Введите фамилию преподавателя')
+                        tel = input('Введите номер телефона преподавателя')
+                        address_id = id_address
+                        univer_id = 1
+                        password = input('Назначьте пароль:')
+                        Models.dbwork.write_teacher_in_DB(name, middle_name, surname, tel, address_id, password, passport, univer_id)
+                # elif action == 3:
+                # elif action == 4:
         #     else:
         #         print('Данные неверные')
         #

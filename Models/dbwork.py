@@ -91,6 +91,14 @@ def write_address_in_list():
         result_lst_address.append(Models.Address.Address(id, country, area, type, type_name, street_type, street_type_name, building, apart))
     return result_lst_address
 
+def edit_marks_in_DB(exam_id, mark):
+    execute_query(connection, f'''UPDATE sub_stud SET mark = '{mark}' WHERE id = '{exam_id}' ''')
+
+
+# lst_address = write_address_in_list()
+# for i in lst_address:
+#     print(i)
+
 def write_address_in_DB(country, area, type, type_name, street_type, street_type_name, building, apart):
     execute_query(connection,f"""INSERT INTO address (country, area, type, type_name, street_type, street_name, building, apart)
             VALUES ('{country}', '{area}', '{type}', '{type_name}', '{street_type}', '{street_type_name}', '{building}', '{apart}')""")
@@ -99,6 +107,14 @@ def write_address_in_DB(country, area, type, type_name, street_type, street_type
 def write_student_in_DB(stud_number, name, middle_name, surname, tel, address_id, password, date_in, date_out, group_id, status):
     execute_query(connection, f"""INSERT INTO student (id, name, middle_name, surname, tel, address_id, password, date_in, date_out, group_id, status)
             VALUES ('{stud_number}', '{name}', '{middle_name}', '{surname}', '{tel}', '{address_id}', '{password}', '{date_in}', '{date_out}', '{group_id}', '{status}')""")
+
+def write_teacher_in_DB(name, middle_name, surname, tel, address_id, password, passport, univer_id):
+    execute_query(connection, f"""INSERT INTO teacher (id, name, middle_name, surname, tel, address_id, univer_id, password)
+            VALUES ('{passport}', '{name}', '{middle_name}', '{surname}', '{tel}', '{address_id}', '{univer_id}', '{password}')""")
+
+def write_exam_in_DB(subject_id, stud_number, mark):
+    execute_query(connection, f'''INSERT INTO sub_stud (sub_id, stud_id, mark)
+            VALUES ('{subject_id}', '{stud_number}', {mark})''')
 
 
 # write_address_in_DB('dgdg', 'dsgdf', 'dsfgdfg', 'dsfgdfg','dsfgdfg', 'dsfgdfg', 'dsfgdfg', 'dsfgdfg')
@@ -110,7 +126,9 @@ def read_data_student():
         print('Список пуст!')
     else:
         return lst_student_DB
-
+# lst_student = read_data_student()
+# for i in lst_student:
+#     print(i)
 def write_student_in_list(lst_address):
     lst_student_DB = read_data_student()
     result_lst_student = []
@@ -132,6 +150,10 @@ def write_student_in_list(lst_address):
                 break
         result_lst_student.append(Models.Student.Student(name, middle_name, surname, tel, address_obj, password, stud_number, date_in, date_out, group_id, status))
     return result_lst_student
+# lst_address = write_address_in_list()
+# lst_student = write_student_in_list(lst_address)
+# for i in lst_student:
+#     print(i)
 
 def read_data_teacher():
     lst_teacher_DB = execute_read_query(connection, "SELECT * FROM teacher")

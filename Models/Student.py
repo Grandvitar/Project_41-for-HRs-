@@ -53,7 +53,7 @@ class Student(Models.Human.Human):
         for sub_stud in lst_sub_stud:
             if self._stud_number == sub_stud.student._stud_number:
                 for subject in lst_subjects:
-                    if subject.id == sub_stud.subject_id:
+                    if subject.id == sub_stud.subject.id:
                         subject_name = subject.name
                         teacher_surname = subject.teacher.surname
                         lst_exams.append(Models.Exam1.Exam1(subject_name, teacher_surname, sub_stud.mark))
